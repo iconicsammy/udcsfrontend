@@ -1,0 +1,35 @@
+<div class="content">
+<app-header></app-header>
+
+<div class="body">
+
+    <div id="new-walk">
+      Today, I am gonna be a good boi and walk. I am in the mood to take <select  #walkSelect>
+            <option *ngFor="let type of walkTypes" value="{{type}}">{{type}}</option>
+        </select>  steps. Ready? <button class="action-btn" (click)="startWalking(walkSelect.value)">Start Walking</button>
+
+        <p>But I think my walks are not updated.  <button class="action-btn" (click)="getWalks()">Update My walks</button></p>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Started On</th>
+                <th>Ended On</th>
+                <th>Steps</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let walk of walks; let i = index" app-walk-row [walk]="walk" (walkEntryEvent)="walkAction($event)">
+
+            </tr>
+        </tbody>
+    </table>
+    
+
+    
+</div>
+
+</div>

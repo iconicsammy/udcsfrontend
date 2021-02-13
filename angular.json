@@ -30,7 +30,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../node_modules/auth0-js/build/auth0.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -93,7 +95,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["../node_modules/auth0-js/build/auth0.min.js"]
           }
         },
         "lint": {
@@ -124,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "readers-journal"
+  "defaultProject": "readers-journal",
+  "cli": {
+    "analytics": "2eafc52e-9565-4383-9fc8-b508a552638d"
+  }
 }

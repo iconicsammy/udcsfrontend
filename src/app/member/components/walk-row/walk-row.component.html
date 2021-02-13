@@ -1,0 +1,13 @@
+
+    <td>{{walk.kind}}</td>
+    <td>{{walk.startedOn}}</td>
+    <td>{{walk.endOn}}</td>
+    <td>{{getSteps()}}</td>
+    <td>
+        <button  class="action-btn-small" (click)="finish()">Finish</button>
+        <button (click)="deleteWalk()"  class="action-btn-small">Delete</button>
+        <button  class="action-btn-small" routerLink="/member/upload/{{walk.walkId}}">Sights</button>
+
+
+
+    </td>
