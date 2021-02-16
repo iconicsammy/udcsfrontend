@@ -1,10 +1,24 @@
 <div class="content">
     <app-header></app-header>
-    
+    <ngx-spinner></ngx-spinner>
     <div class="body">
     
     <div id="gallery">
-        Your gallery from your walk
+        <div id="uploader">
+            <input style="display: none" type="file" #fileInput (change)="setFileBeingUploaded($event)"> 
+            <button (click)="fileInput.click()"class="primary-btn">Select File</button>
+           <button (click)="uploadNewImage()" class="primary-btn">Upload</button>
+           <p>
+            <button (click)="getImages()" class="primary-btn">Refresh</button>
+           </p>
+        </div>
+
+        <div class="gallery cf">
+            <div *ngFor="let image of images; let i = index">
+                <img src={{image.imageId}} alt="image"/>
+            </div>
+          </div>
+
     </div>
     
     </div>

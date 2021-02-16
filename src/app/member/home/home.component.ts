@@ -4,6 +4,7 @@ import { changeDateToString } from '../helpers/helpers';
 import { WalkType } from '../types/enums/enumWalkType';
 import { Walk } from '../types/interfaces/walk';
 import { WalkAction } from '../types/interfaces/walkAction';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -16,12 +17,10 @@ export class HomeComponent implements OnInit {
   public walks: Walk[] = [];
   public walkTypes: string[] = [];
 
-  constructor(private service: WalkService) { 
+  constructor(private service: WalkService, private spinner: NgxSpinnerService) { 
     for(let walkType in WalkType){
-      console.log(21, walkType)
       this.walkTypes.push(walkType)
     }
-    console.log(21, this.walkTypes)
   }
 
   startWalking = (walkType: string) => {
@@ -42,16 +41,19 @@ export class HomeComponent implements OnInit {
             break;
     }
     const walk : Walk = {
-      walkId: (Math.floor(Math.random() * 6000000) + 10000).toString() ,
+      walkId: (Math.floor(Math.random() * 6000000) + 100000).toString() ,
       kind: wType,
       startedOn: startOn,
       endOn: undefined
     };
+    this.spinner.show();
    this.service.addNewWalk(walk).subscribe(done=>{
      walk.walkId = done["item"].walkId;
      this.walks.push(walk);
+     this.spinner.hide();
    },err=>{
      alert('sorry cant add your item')
+     this.spinner.hide();
    })
   }
 
@@ -64,12 +66,15 @@ export class HomeComponent implements OnInit {
   }
 
   getWalks = () =>{
+    this.spinner.show();
   this.walks = [];
     this.service.fetchMyWalks()
     .subscribe(data=>{
       this.walks = data['items'];
+      this.spinner.hide();
     }, err=>{
-      console.log(17, err)
+      alert('There was an error getting your walks...try to relogin')
+      this.spinner.hide();
     });
   }
 

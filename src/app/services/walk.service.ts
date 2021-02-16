@@ -34,5 +34,28 @@ export class WalkService {
     return this.http.patch(ENDPOINTS.updateWalk + walkId, {endOn});
   }
 
+   getImages(walkId: string): Observable<any> {
+    return this.http.get(ENDPOINTS.getImages + walkId);
+  }
+
+  getUploadURL(walkId: string): Observable<any>{
+    /*
+      get the presigned URL
+    */
+    return this.http.post(`${ENDPOINTS.getUploadURL}${walkId}/attachment`, {});
+  }
+
+  uploadToS3(uploadURL: string, file : Buffer, fileName: string): Observable<any>{
+    // Create form data 
+    // const formData = new FormData();  
+    //     // Store form name as "file" with file data 
+    //   formData.append(fileName, file); 
+    return this.http.put(uploadURL, file);
+  }
+
+  saveImageInfo(imageName: string, walkId: string): Observable<any>{
+    return this.http.put(ENDPOINTS.saveImageInfo + walkId, {imageName})
+  }
+
 
 }

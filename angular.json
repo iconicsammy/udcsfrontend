@@ -31,7 +31,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "../node_modules/auth0-js/build/auth0.min.js"
             ]
           },
           "configurations": {
@@ -95,7 +94,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": ["../node_modules/auth0-js/build/auth0.min.js"]
+            "scripts": []
           }
         },
         "lint": {

@@ -13,6 +13,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: '',
+    component: LoginComponent
+  },
+  {
     path: 'public/callback',
     component: Auth0callbackComponent
   },
@@ -27,7 +31,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'member/upload/:id',
+    path: 'member/gallery/:walkId',
     component: UploadComponent,
     canActivate: [AuthGuard]
   },

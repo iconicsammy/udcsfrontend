@@ -47,7 +47,6 @@ export class AuthService2 {
       if (authResult && authResult.accessToken) {
         this.getUserInfo(authResult);
       } else if (err) {
-        console.log(err);
         this.logout();
         this.authenticated = false;
       }
@@ -64,7 +63,6 @@ export class AuthService2 {
   }
 
   private _setSession(authResult: any, profile: any) {
-    console.log(67, authResult, profile);
     const expTime = authResult.expiresIn * 1000 + Date.now();
     // Save authentication data and update login status subject
     localStorage.setItem('expires_at', JSON.stringify(expTime));
@@ -88,8 +86,10 @@ export class AuthService2 {
   public isLoggedIn(): boolean {
     // Check if current date is before token
     // expiration and user is signed in locally
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    console.log(121, expiresAt)
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '');
+   if (!expiresAt){
+     return false;
+   }
     return Date.now() < expiresAt && this.authenticated;
   }
 
